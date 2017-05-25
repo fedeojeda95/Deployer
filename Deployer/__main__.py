@@ -1,5 +1,6 @@
 import os
 import subprocess
+import sys
 from .constants import *
 
 
@@ -37,8 +38,14 @@ def move_to_admin():
     os.chdir(ADMIN_LOCATION)
 
 
+def is_only_redeploy():
+    return len(sys.argv) > 1 and (sys.argv[1] == '-r' or sys.argv[1] == '--redeploy')
+
+
 if __name__ == "__main__":
     move_to_admin()
-    restart_domain()
+    should_only_redeploy = is_only_redeploy()
+    if not should_only_redeploy:
+        restart_domain()
     redeploy_application()
 
