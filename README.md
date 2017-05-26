@@ -6,6 +6,8 @@ and deploys the project.
 
 ## Install
 
+### Pyenv
+
 Usage of pyenv to manage the python version and its dependencies is recommended
 
 1. [Install pyenv](https://github.com/yyuu/pyenv-installer)
@@ -28,9 +30,15 @@ Usage of pyenv to manage the python version and its dependencies is recommended
     pyenv local deployer
     ```
 
+### Global version
+
+Just be sure to have python version 3.6.1
+
 ## Usage
 
-To run the script, just execute `python -m Deployer` from the root
+* Change both the variables `GLASSFISH_LOCATION` to your glassfish instalation folder and `PROJECT_LOCATION`,
+ `PROJECT_NAME` to the corresponding of your project
+* To run the script, just execute `python -m Deployer` from the root
 
 
 Created by [Federico Ojeda](https://github.com/fedeojeda95)
