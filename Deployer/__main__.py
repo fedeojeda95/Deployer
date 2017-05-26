@@ -25,9 +25,10 @@ def restart_domain():
     run_command(START_DOMAIN)
 
 
-def redeploy_application():
-    print_current_step("UNDEPLOYING OLDER VERSION:")
-    run_command(UNDEPLOY)
+def deploy_application(first_deploy):
+    if not first_deploy:
+        print_current_step("UNDEPLOYING OLDER VERSION:")
+        run_command(UNDEPLOY)
 
     print_current_step("DEPLOYING NEW VERSION:")
     run_command(DEPLOY)
@@ -42,10 +43,15 @@ def is_only_redeploy():
     return len(sys.argv) > 1 and (sys.argv[1] == '-r' or sys.argv[1] == '--redeploy')
 
 
+def is_first_deploy():
+    return len(sys.argv) > 1 and (sys.argv[1] == '-f' or sys.argv[1] == '--first-deploy')
+
+
 if __name__ == "__main__":
     move_to_admin()
     should_only_redeploy = is_only_redeploy()
+    first_deploy = is_first_deploy()
     if not should_only_redeploy:
         restart_domain()
-    redeploy_application()
+    deploy_application(first_deploy)
 
